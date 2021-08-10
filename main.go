@@ -2,12 +2,16 @@ package main
 
 import (
 	"flag"
-	"github.com/sujithps/ticket-booking-system/app"
-	"github.com/sujithps/ticket-booking-system/db"
+	"fmt"
+
+	"github.com/harykr/ticket-booking-system/app"
+	"github.com/harykr/ticket-booking-system/db"
 )
 
 func main() {
 	migrate := flag.Bool("migrate", false, "To run migrate")
+
+	seed := flag.Bool("seed", false, "To run db seeding")
 	flag.Parse()
 
 	if *migrate {
@@ -15,6 +19,9 @@ func main() {
 		return
 	}
 
+	if *seed {
+		fmt.Println("running seeds")
+	}
+
 	app.StartServer()
 }
-
