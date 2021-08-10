@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 
 	"github.com/harykr/ticket-booking-system/app"
 	"github.com/harykr/ticket-booking-system/db"
@@ -10,18 +9,12 @@ import (
 
 func main() {
 	migrate := flag.Bool("migrate", false, "To run migrate")
-
-	seed := flag.Bool("seed", false, "To run db seeding")
+	port := flag.String("port", ":8080", "port")
 	flag.Parse()
 
 	if *migrate {
 		db.RunMigrations()
 		return
 	}
-
-	if *seed {
-		fmt.Println("running seeds")
-	}
-
-	app.StartServer()
+	app.StartServer(*port)
 }
